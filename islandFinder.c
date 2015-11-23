@@ -6,7 +6,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 		  int row, int col, int island, char flag) {
 	if(flag == 'N') {
 		if(row == 0)
-			break
+			break;
 		else
 			row -= 1;
 		if(linePic[row*width + col] == 0)
@@ -20,7 +20,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(flag == 'E') {
 		if(col == width - 1)
-			break
+			break;
 		else
 			col += 1;
 		if(linePic[row*width + col] == 0)
@@ -34,7 +34,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(flag == 'S') {
 		if(row == height - 1)
-			break
+			break;
 		else
 			row += 1;
 		if(linePic[row*width + col] == 0)
@@ -48,7 +48,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(char == 'W') {
 		if(col == 0)
-			break
+			break;
 		else
 			col -= 1;
 		if(linePic[row*width + col] == 0)
@@ -62,7 +62,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(char == 'a') {
 		if( (row == 0) && (col == width - 1) )
-			break
+			break;
 		else {
 			row -= 1;
 			col += 1;
@@ -80,7 +80,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(char == 'b') {
 		if( (row == height - 1) && (col == width - 1) )
-			break
+			break;
 		else {
 			row += 1;
 			col += 1;
@@ -98,7 +98,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(char == 'c') {
 		if( (row == height - 1) && (col == 0) )
-			break
+			break;
 		else {
 			row += 1;
 			col -= 1;
@@ -116,7 +116,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 	}
 	if(char == 'd') {
 		if( (row == 0) && (col == 0) )
-			break
+			break;
 		else {
 			row -= 1;
 			col -= 1;
