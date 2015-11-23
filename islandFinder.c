@@ -135,17 +135,9 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 }
 
 
-char* islandFinder(char* linePic, int height, int width) {
+char* islandFinder(char* linePic, char* newPic, int height, int width) {
 
-	// allocate memory for new island pic
-	char* newPic = malloc(height * width * sizeof(char));
 
-	// initialize array of 0's for new island pic
-	for(int i = 0; i < height; i++) {
-		for(int j = 0; j < width; j++) {
-			newPic[i*width + j] = 0;
-		}
-	}
 
 	// set island counter to 0
 	int island = 2;

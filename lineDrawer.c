@@ -27,13 +27,23 @@ void main() {
 		}
 	}
 
+	// allocate memory for new island pic
+	char* islandPic = malloc(height * width * sizeof(char));
+
+	// initialize array of 0's for new island pic
+	for(int i = 0; i < height; i++) {
+		for(int j = 0; j < width; j++) {
+			islandPic[i*width + j] = 0;
+		}
+	}
+
 	printf("Old picture\n");
 	printPicture(linePic, height, width);
 	linePic = lineThinning(linePic, height, width, 0);
 	printf("New picture\n");
 	printPicture(linePic, height, width);
 
-	char* islandPic = islandFinder(linePic, height, width);
+	islandPic = islandFinder(linePic, islandPic, height, width);
 	printPicture(islandPic, height, width);
 
 	free(islandPic);
