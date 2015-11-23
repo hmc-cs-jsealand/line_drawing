@@ -15,6 +15,18 @@ char picture[100] = {0,0,0,0,0, 0,0,0,0,0,
 					 0,1,1,1,1, 1,0,0,1,0,
 					 0,0,0,0,0, 0,0,0,0,0};
 
+char simplePic[100] = {0,0,0,0,0, 0,0,0,0,0,
+					   0,0,0,0,0, 0,0,0,0,0,
+					   0,0,0,0,0, 0,0,0,0,0,
+					   0,0,0,0,0, 1,1,0,0,0,
+					   0,0,0,0,0, 0,1,1,0,0,
+
+ 					   0,0,0,1,0, 0,0,0,0,0,
+					   0,0,0,1,0, 0,0,0,0,0,
+					   0,0,0,1,0, 0,0,1,1,0,
+					   0,0,0,1,0, 0,0,0,1,0,
+					   0,0,0,0,0, 0,0,0,0,0};
+
 
 void main() {
 	int height = 10;
@@ -23,7 +35,7 @@ void main() {
 	char* linePic = malloc(height * width * sizeof(char));
 	for(int row = 0; row < height; row++) {
 		for(int col = 0; col < width; col ++) {
-			linePic[row*width + col] = picture[row*width + col];
+			linePic[row*width + col] = simplePic[row*width + col];
 		}
 	}
 
