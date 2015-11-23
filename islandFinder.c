@@ -150,8 +150,8 @@ char* islandFinder(char* linePic, char* newPic, int height, int width) {
 	//		else
 	//			set pixel to island
 	//			run getIsland on that pixel
-	for(int row = 1; row < height - 1; row++) {
-		for(int col = 1; col < width - 1; col++) {
+	for(int row = 0; row < height; row++) {
+		for(int col = 0; col < width; col++) {
 			if(newPic[row*width + col] == 0) {
 				if(linePic[row*width + col] == 0)
 					newPic[row*width + col] = 1;
