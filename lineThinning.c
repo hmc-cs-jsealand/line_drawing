@@ -1,3 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void printPicture(char* pic, int height, int width) {
+	for(int row = 0; row < height; row++) {
+		int o = row * height;
+		printf("%d%d%d%d%d%d%d%d%d%d\n", pic[o], pic[o+1], pic[o+2], pic[o+3], pic[o+4], pic[o+5], pic[o+6], pic[o+7], pic[o+8], pic[o+9]);
+	}
+}
+
 char* lineThinning(char* edgePic, int height, int width, int step) {
 
 	// allocate new array for marking pixels
@@ -107,12 +117,6 @@ char picture[100] = {0,0,0,0,0, 0,0,0,0,0,
 					 0,1,1,1,1, 1,0,0,1,0,
 					 0,0,0,0,0, 0,0,0,0,0};
 
-void printPicture(char* pic, int height, int width) {
-	for(int row = 0; row < height; row++) {
-		int o = row * height;
-		printf("%d%d%d%d%d%d%d%d%d%d\n", pic[o], pic[o+1], pic[o+2], pic[o+3], pic[o+4], pic[o+5], pic[o+6], pic[o+7], pic[o+8], pic[o+9]);
-	}
-}
 
 void main() {
 	int height = 10;
