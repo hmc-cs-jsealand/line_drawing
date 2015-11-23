@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <lineThinning.c>
-#include <islandFinder.c>
+#include "lineThinning.c"
+#include "islandFinder.c"
 
 char picture[100] = {0,0,0,0,0, 0,0,0,0,0,
 					 0,1,1,1,1, 1,0,0,0,0,

@@ -1,5 +1,5 @@
 char* islandFinder(char* linePic, int height, int width) {
-	
+
 	// allocate memory for new island pic
 	char* newPic = malloc(height * width * sizeof(char));
 
@@ -27,7 +27,7 @@ char* islandFinder(char* linePic, int height, int width) {
 					newPic[row*width + col] = 1;
 				else {
 					newPic[row*width + col] = island;
-					char flag[8] = {N,S,E,W,a,b,c,d};
+					char flag[8] = {'N','S','E','W','a','b','c','d'};
 					for(int i = 0; i < 8; i++) {
 						getIsland(linePic, newPic, height, width, row, col, island, flag[i]);
 					}
