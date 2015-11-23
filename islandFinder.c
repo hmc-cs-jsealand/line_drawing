@@ -1,3 +1,140 @@
+// Flags
+// N, S, E, W
+// a = NE, b = SE, c = SW, d = NW
+
+void getIsland(char* linePic, char* newPic, int height, int width,
+		  int row, int col, int island, char flag) {
+	if(flag == 'N') {
+		if(row == 0)
+			break
+		else
+			row -= 1;
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'd');
+			getIsland(linePic, newPic, width, height, row, col, island, 'N');
+			getIsland(linePic, newPic, width, height, row, col, island, 'a');
+		}
+	}
+	if(flag == 'E') {
+		if(col == width - 1)
+			break
+		else
+			col += 1;
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'a');
+			getIsland(linePic, newPic, width, height, row, col, island, 'E');
+			getIsland(linePic, newPic, width, height, row, col, island, 'b');
+		}
+	}
+	if(flag == 'S') {
+		if(row == height - 1)
+			break
+		else
+			row += 1;
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'b');
+			getIsland(linePic, newPic, width, height, row, col, island, 'S');
+			getIsland(linePic, newPic, width, height, row, col, island, 'c');
+		}
+	}
+	if(char == 'W') {
+		if(col == 0)
+			break
+		else
+			col -= 1;
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'c');
+			getIsland(linePic, newPic, width, height, row, col, island, 'W');
+			getIsland(linePic, newPic, width, height, row, col, island, 'd');
+		}
+	}
+	if(char == 'a') {
+		if( (row == 0) && (col == width - 1) )
+			break
+		else {
+			row -= 1;
+			col += 1;
+		}
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'd');
+			getIsland(linePic, newPic, width, height, row, col, island, 'N');
+			getIsland(linePic, newPic, width, height, row, col, island, 'a');
+			getIsland(linePic, newPic, width, height, row, col, island, 'E');
+			getIsland(linePic, newPic, width, height, row, col, island, 'b');
+		}
+	}
+	if(char == 'b') {
+		if( (row == height - 1) && (col == width - 1) )
+			break
+		else {
+			row += 1;
+			col += 1;
+		}
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'a');
+			getIsland(linePic, newPic, width, height, row, col, island, 'E');
+			getIsland(linePic, newPic, width, height, row, col, island, 'b');
+			getIsland(linePic, newPic, width, height, row, col, island, 'S');
+			getIsland(linePic, newPic, width, height, row, col, island, 'c');
+		}
+	}
+	if(char == 'c') {
+		if( (row == height - 1) && (col == 0) )
+			break
+		else {
+			row += 1;
+			col -= 1;
+		}
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'b');
+			getIsland(linePic, newPic, width, height, row, col, island, 'S');
+			getIsland(linePic, newPic, width, height, row, col, island, 'c');
+			getIsland(linePic, newPic, width, height, row, col, island, 'W');
+			getIsland(linePic, newPic, width, height, row, col, island, 'd');
+		}
+	}
+	if(char == 'd') {
+		if( (row == 0) && (col == 0) )
+			break
+		else {
+			row -= 1;
+			col -= 1;
+		}
+		if(linePic[row*width + col] == 0)
+			newPic[row*width + col] = 1;
+		else {
+			newPic[row*width + col] = island;
+			getIsland(linePic, newPic, width, height, row, col, island, 'c');
+			getIsland(linePic, newPic, width, height, row, col, island, 'W');
+			getIsland(linePic, newPic, width, height, row, col, island, 'd');
+			getIsland(linePic, newPic, width, height, row, col, island, 'N');
+			getIsland(linePic, newPic, width, height, row, col, island, 'a');
+		}
+	}
+}
+
+
 char* islandFinder(char* linePic, int height, int width) {
 
 	// allocate memory for new island pic
@@ -39,138 +176,3 @@ char* islandFinder(char* linePic, int height, int width) {
 	return newPic;
 }
 
-// Flags
-// N, S, E, W
-// a = NE, b = SE, c = SW, d = NW
-
-void getIsland(char* linePic, char* newPic, int height, int width,
-		  int row, int col, int island, char flag) {
-	if(flag == 'N') {
-		if(row == 0)
-			return
-		else
-			row -= 1;
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'd');
-			getIsland(linePic, newPic, width, height, row, col, island, 'N');
-			getIsland(linePic, newPic, width, height, row, col, island, 'a');
-		}
-	}
-	if(flag == 'E') {
-		if(col == width - 1)
-			return
-		else
-			col += 1;
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'a');
-			getIsland(linePic, newPic, width, height, row, col, island, 'E');
-			getIsland(linePic, newPic, width, height, row, col, island, 'b');
-		}
-	}
-	if(flag == 'S') {
-		if(row == height - 1)
-			return
-		else
-			row += 1;
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'b');
-			getIsland(linePic, newPic, width, height, row, col, island, 'S');
-			getIsland(linePic, newPic, width, height, row, col, island, 'c');
-		}
-	}
-	if(char == 'W') {
-		if(col == 0)
-			return
-		else
-			col -= 1;
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'c');
-			getIsland(linePic, newPic, width, height, row, col, island, 'W');
-			getIsland(linePic, newPic, width, height, row, col, island, 'd');
-		}
-	}
-	if(char == 'a') {
-		if( (row == 0) && (col == width - 1) )
-			return
-		else {
-			row -= 1;
-			col += 1;
-		}
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'd');
-			getIsland(linePic, newPic, width, height, row, col, island, 'N');
-			getIsland(linePic, newPic, width, height, row, col, island, 'a');
-			getIsland(linePic, newPic, width, height, row, col, island, 'E');
-			getIsland(linePic, newPic, width, height, row, col, island, 'b');
-		}
-	}
-	if(char == 'b') {
-		if( (row == height - 1) && (col == width - 1) )
-			return
-		else {
-			row += 1;
-			col += 1;
-		}
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'a');
-			getIsland(linePic, newPic, width, height, row, col, island, 'E');
-			getIsland(linePic, newPic, width, height, row, col, island, 'b');
-			getIsland(linePic, newPic, width, height, row, col, island, 'S');
-			getIsland(linePic, newPic, width, height, row, col, island, 'c');
-		}
-	}
-	if(char == 'c') {
-		if( (row == height - 1) && (col == 0) )
-			return
-		else {
-			row += 1;
-			col -= 1;
-		}
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'b');
-			getIsland(linePic, newPic, width, height, row, col, island, 'S');
-			getIsland(linePic, newPic, width, height, row, col, island, 'c');
-			getIsland(linePic, newPic, width, height, row, col, island, 'W');
-			getIsland(linePic, newPic, width, height, row, col, island, 'd');
-		}
-	}
-	if(char == 'd') {
-		if( (row == 0) && (col == 0) )
-			return
-		else {
-			row -= 1;
-			col -= 1;
-		}
-		if(linePic[row*width + col] == 0)
-			newPic[row*width + col] = 1;
-		else {
-			newPic[row*width + col] = island;
-			getIsland(linePic, newPic, width, height, row, col, island, 'c');
-			getIsland(linePic, newPic, width, height, row, col, island, 'W');
-			getIsland(linePic, newPic, width, height, row, col, island, 'd');
-			getIsland(linePic, newPic, width, height, row, col, island, 'N');
-			getIsland(linePic, newPic, width, height, row, col, island, 'a');
-		}
-	}
-}
