@@ -33,5 +33,9 @@ void main() {
 	printf("New picture\n");
 	printPicture(linePic, height, width);
 
+	char* islandPic = islandFinder(linePic, height, width);
+	printPicture(islandPic, height, width);
+
+	free(islandPic);
 	free(linePic);
 }
