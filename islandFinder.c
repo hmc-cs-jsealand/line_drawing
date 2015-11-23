@@ -4,6 +4,7 @@
 
 void getIsland(char* linePic, char* newPic, int height, int width,
 		  int row, int col, int island, char flag) {
+	printf("Row: %d, Col: %d\n", row, col);
 	if(flag == 'N') {
 		if(row == 0) {}
 		else {
@@ -149,8 +150,8 @@ char* islandFinder(char* linePic, char* newPic, int height, int width) {
 	//		else
 	//			set pixel to island
 	//			run getIsland on that pixel
-	for(int row = 0; row < height; row++) {
-		for(int col = 0; col < width; col++) {
+	for(int row = 1; row < height - 1; row++) {
+		for(int col = 1; col < width - 1; col++) {
 			if(newPic[row*width + col] == 0) {
 				if(linePic[row*width + col] == 0)
 					newPic[row*width + col] = 1;
