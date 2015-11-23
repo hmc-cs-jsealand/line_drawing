@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 void printPicture(char* pic, int height, int width) {
 	for(int row = 0; row < height; row++) {
 		int o = row * height;
@@ -82,14 +79,14 @@ char* lineThinning(char* edgePic, int height, int width, int step) {
 	}
 	// if we didn't find any pixels to delete, return modified edgePic
 	if(count == 0 && step == 0) {
-		printf("returning\n");
+		// printf("returning\n");
 		return edgePic;
 	}
 
 	// else modify edgePic and recurse
 	else {
-		printf("deleting\n");
-		printPicture(thinLinePic, height, width);
+		// printf("deleting\n");
+		// printPicture(thinLinePic, height, width);
 		// delete pixels
 		for(int row = 1; row < height - 1; row++) {
 			for(int col = 1; col < width - 1; col ++) {
@@ -105,35 +102,3 @@ char* lineThinning(char* edgePic, int height, int width, int step) {
 	}
 }
 
-char picture[100] = {0,0,0,0,0, 0,0,0,0,0,
-					 0,1,1,1,1, 1,0,0,0,0,
-					 0,1,1,0,1, 1,1,1,1,0,
-					 0,1,1,0,1, 1,1,1,1,0,
-					 0,1,1,1,0, 0,1,1,0,0,
-
-					 0,1,1,1,0, 0,0,0,0,0,
-					 0,1,1,1,0, 0,0,0,0,0,
-					 0,1,1,1,1, 1,1,1,1,0,
-					 0,1,1,1,1, 1,0,0,1,0,
-					 0,0,0,0,0, 0,0,0,0,0};
-
-
-void main() {
-	int height = 10;
-	int width = 10;
-
-	char* linePic = malloc(height * width * sizeof(char));
-	for(int row = 0; row < height; row++) {
-		for(int col = 0; col < width; col ++) {
-			linePic[row*width + col] = picture[row*width + col];
-		}
-	}
-
-	printf("Old picture\n");
-	printPicture(linePic, height, width);
-	linePic = lineThinning(linePic, height, width, 0);
-	printf("New picture\n");
-	printPicture(linePic, height, width);
-
-	free(linePic);
-}
