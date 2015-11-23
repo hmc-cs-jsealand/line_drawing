@@ -4,7 +4,7 @@
 
 void getIsland(char* linePic, char* newPic, int height, int width,
 		  int row, int col, int island, char flag) {
-	printf("Row: %d, Col: %d\n", row, col);
+	// printf("Row: %d, Col: %d\n", row, col);
 	if(flag == 'N') {
 		if(row == 0) {}
 		else {
@@ -159,7 +159,7 @@ char* islandFinder(char* linePic, char* newPic, int height, int width) {
 					newPic[row*width + col] = island;
 					char flag[8] = {'N','S','E','W','a','b','c','d'};
 					for(int i = 0; i < 8; i++) {
-						printf("flag is %c\n",flag[i]);
+						// printf("flag is %c\n",flag[i]);
 						getIsland(linePic, newPic, height, width, row, col, island, flag[i]);
 					}
 					island++;
