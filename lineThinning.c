@@ -1,7 +1,10 @@
 void printPicture(char* pic, int height, int width) {
 	for(int row = 0; row < height; row++) {
 		int o = row * height;
-		printf("%d%d%d%d%d%d%d%d%d%d\n", pic[o], pic[o+1], pic[o+2], pic[o+3], pic[o+4], pic[o+5], pic[o+6], pic[o+7], pic[o+8], pic[o+9]);
+		if(width == 10)
+			printf("%d%d%d%d%d%d%d%d%d%d\n" , pic[o], pic[o+1], pic[o+2], pic[o+3], pic[o+4], pic[o+5], pic[o+6], pic[o+7], pic[o+8], pic[o+9]);
+		else if(width == 16)
+			printf("%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d\n ", pic[o], pic[o+1], pic[o+2], pic[o+3], pic[o+4], pic[o+5], pic[o+6], pic[o+7], pic[o+8], pic[o+9],pic[o+10],pic[o+11],pic[o+12],pic[o+13],pic[o+14],pic[o+15]);
 	}
 }
 

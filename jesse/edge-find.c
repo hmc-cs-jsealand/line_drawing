@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-char *file = "obama.png";
+char *file = "birdsketch.png";
 char *edgesfile = "edges.png";
 char *thin_edgesfile = "thinedges.png";
 
@@ -80,14 +80,15 @@ void main(int argc, char *argv[])
 
 	char *thinedges = malloc(height*width*sizeof(char));
 	printf("thinning edges...\n");
-	for(int i = 0; i < height*width; i++){
-		printf("%d \n",edges[i]);
-		if(edges[i] = 255){
-			thinedges[i] = 0;
-
-		}
-		else{
-			thinedges[i] = 1;
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++) {
+			int index = i*width + j;
+			if(edges[index] == 0){
+				thinedges[index] = 0;
+			}
+			else{
+				thinedges[index] = 1;
+			}
 		}
 	}
 
@@ -99,7 +100,7 @@ void main(int argc, char *argv[])
 
 
 	for(int i = 0; i < height*width; i++){
-		if(thinedges[i] = 0){
+		if(thinedges[i] == 0){
 			edges[i] = 255;
 		}
 		else{

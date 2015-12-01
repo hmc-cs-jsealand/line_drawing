@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include "lineThinning.c"
 #include "islandFinder.c"
+#include "mazeFollower.c"
 
 char picture[100] = {0,0,0,0,0, 0,0,0,0,0,
 					 0,1,1,1,1, 1,0,0,0,0,
 					 0,1,1,0,1, 1,1,1,1,0,
-					 0,1,1,0,0, 1,1,1,1,0,
+					 0,1,1,0,1, 1,1,1,1,0,
 					 0,1,1,1,0, 0,1,1,0,0,
 
 					 0,1,1,1,0, 0,0,0,0,0,
@@ -27,15 +28,32 @@ char simplePic[100] = {0,0,0,0,0, 0,0,0,0,0,
 					   0,0,0,1,0, 0,0,0,1,0,
 					   0,0,0,0,0, 0,0,0,0,0};
 
+char bigPic[256] = { 0 , 1 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 ,
+1 , 0 , 1 , 0 , 0 , 0 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 0 ,
+1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 ,
+0 , 0 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 0 , 0 , 0 , 1 , 0 , 1 , 0 ,
+1 , 1 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 0 ,
+1 , 0 , 1 , 0 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 ,
+1 , 1 , 0 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 ,
+1 , 1 , 1 , 0 , 0 , 0 , 1 , 0 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 ,
+1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 ,
+1 , 0 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 0 , 1 , 0 , 0 , 0 , 1 , 0 ,
+1 , 0 , 1 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 0 ,
+1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 0 , 0 ,
+0 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 0 , 1 ,
+1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 ,
+1 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 ,
+1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 1 };
+
 
 void main() {
-	int height = 10;
-	int width = 10;
+	int height = 16;
+	int width = 16;
 
 	char* linePic = malloc(height * width * sizeof(char));
 	for(int row = 0; row < height; row++) {
 		for(int col = 0; col < width; col ++) {
-			linePic[row*width + col] = picture[row*width + col];
+			linePic[row*width + col] = bigPic[row*width + col];
 		}
 	}
 
@@ -56,7 +74,10 @@ void main() {
 	printPicture(linePic, height, width);
 
 	islandPic = islandFinder(linePic, islandPic, height, width);
+	printf('islandPic\n');
 	printPicture(islandPic, height, width);
+	printf('linePic\n');
+	printPicture(linePic, height, width);
 
 	free(islandPic);
 	free(linePic);

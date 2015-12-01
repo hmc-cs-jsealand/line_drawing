@@ -28,7 +28,7 @@ char* lineThinning(char* edgePic, int height, int width, int step) {
 	int count = 0;
 	for(int row = 1; row < height - 1; row++) {
 		for(int col = 1; col < width - 1; col ++) {
-			if(edgePic[row*width + col] == 1) {	//OxFF USED TO BE 1
+			if(edgePic[row*width + col] == 1) {	
 
 				// if you add these to row and col
 				// you go around a pixel in a clockwise circle
@@ -66,6 +66,11 @@ char* lineThinning(char* edgePic, int height, int width, int step) {
 						thinLinePic[row*width + col] = 1;	
 						count++;
 					}
+					// delete single pixels
+					if(Ncount == 0) {
+						thinLinePic[row*width + col] = 1;
+						count++;
+					}
 				}
 				// mark N, W, SE, SW directions
 				else {
@@ -74,6 +79,11 @@ char* lineThinning(char* edgePic, int height, int width, int step) {
 					if( (Ncount >= 2) && (Ncount <= 6) && (Scount == 1) && 
 						(TwoFourEight == 0) && (TwoSixEight == 0) && (P[5] != 0) ) {
 						thinLinePic[row*width + col] = 1;	
+						count++;
+					}
+					// delete single pixels
+					if(Ncount == 0) {
+						thinLinePic[row*width + col] = 1;
 						count++;
 					}
 				}
