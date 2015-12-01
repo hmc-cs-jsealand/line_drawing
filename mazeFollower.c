@@ -56,7 +56,7 @@ int spiSendReceive(char send1, char send2) {
 	return (message1 << 7) + (message2 >> 1);
 }
 
-void main(void) {
+void adcRead(void) {
 	printf("running main\n");
 	pioInit();
 	printf("pioInit done\n");
@@ -81,3 +81,217 @@ void mazeFollower(int** maze, int height, int width) {
 	int message = spiSendReceive()
 	spiSendReceive()
 }
+
+
+// penState 0th bit is pen up (0)/down (1), 1st bit is move enable
+// 3 is movement enabled, pen down
+// 2 is movement enabled, pen up
+// 1 is movement disabled, pen down
+// 0 is movement disabled, pen up
+int penMover(char xpos, char ypos, char penState) {
+	spi_reg[1] = penState;
+	spi_reg[1] = xpos;
+	spi_reg[1] = ypos;
+	while( !(spi_reg[0] & 0x00010000));
+	char message1 = spi_reg[1];
+	char message2 = spi_reg[1];
+	char message3 = spi_reg[1];
+	if(message3 > 7)
+		return 69;
+	else
+		return penMover(xpos, ypos, penState);
+}
+
+
+// Flags
+// N, S, E, W
+// a = NE, b = SE, c = SW, d = NW
+
+void getIsland(char* linePic, char* newPic, int height, int width,
+		  int row, int col, int island, char flag) {
+	// printf("Row: %d, Col: %d\n", row, col);
+	if(flag == 'N') {
+		if(row == 0) {}
+		else {
+			row -= 1;
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'N');
+				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'E') {
+		if(col == width - 1){}
+		else {
+			col += 1;
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'E');
+				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				penMover(row, col, 0;
+			}
+		}
+	}
+	if(flag == 'S') {
+		if(row == height - 1) {}
+		else {
+			row += 1;
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'S');
+				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'W') {
+		if(col == 0) {}
+		else {
+			col -= 1;
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'W');
+				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'a') {
+		if( (row == 0) || (col == width - 1) ) {}
+		else {
+			row -= 1;
+			col += 1;
+
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				getIsland(linePic, newPic, height, width, row, col, island, 'N');
+				getIsland(linePic, newPic, height, width, row, col, island, 'E');
+				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'b') {
+		if( (row == height - 1) || (col == width - 1) ){}
+		else {
+			row += 1;
+			col += 1;
+
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				getIsland(linePic, newPic, height, width, row, col, island, 'E');
+				getIsland(linePic, newPic, height, width, row, col, island, 'S');
+				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'c') {
+		if( (row == height - 1) || (col == 0) ){}
+		else {
+			row += 1;
+			col -= 1;
+
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				getIsland(linePic, newPic, height, width, row, col, island, 'S');
+				getIsland(linePic, newPic, height, width, row, col, island, 'W');
+				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				penMover(row, col, 0);
+			}
+		}
+	}
+	if(flag == 'd') {
+		if( (row == 0) || (col == 0) ) {}
+		else {
+			row -= 1;
+			col -= 1;
+
+			if(linePic[row*width + col] == 0)
+				newPic[row*width + col] = 1;
+			else if(newPic[row*width + col] == 0) {
+				newPic[row*width + col] = island;
+				penMover(row, col, 3);
+				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				getIsland(linePic, newPic, height, width, row, col, island, 'W');
+				getIsland(linePic, newPic, height, width, row, col, island, 'N');
+				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				penMover(row, col, 0);
+			}
+		}
+	}
+}
+
+
+char* islandFinder(char* linePic, char* newPic, int height, int width) {
+
+
+
+	// set island counter to 0
+	int island = 2;
+
+	// loop through newPic
+	// if pixel is 0
+	//		if pixel is not part of line
+	//			set pixel to 1
+	//		else
+	//			set pixel to island
+	//			run getIsland on that pixel
+	for(int row = 0; row < height; row++) {
+		for(int col = 0; col < width; col++) {
+			if(newPic[row*width + col] == 0) {
+				if(linePic[row*width + col] == 0)
+					newPic[row*width + col] = 1;
+				else {
+					newPic[row*width + col] = island;
+
+					penMover(col, row, 2);
+					penMover(col, row, 1);
+
+					char flag[8] = {'N','S','E','W','a','b','c','d'};
+					for(int i = 0; i < 8; i++) {
+						// printf("flag is %c\n",flag[i]);
+						getIsland(linePic, newPic, height, width, row, col, island, flag[i]);
+					}
+					island++;
+				}
+			}
+		}
+	}
+	return newPic;
+}
+
