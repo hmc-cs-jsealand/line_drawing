@@ -73,14 +73,6 @@ void adcRead(void) {
 
 
 
-void mazeFollower(int** maze, int height, int width) {
-	pioInit();
-	spiInit();
-	int settings = 0x00000000;
-	spiStart(100000, settings);
-	int message = spiSendReceive()
-	spiSendReceive()
-}
 
 
 // penState 0th bit is pen up (0)/down (1), 1st bit is move enable
@@ -138,7 +130,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 				getIsland(linePic, newPic, height, width, row, col, island, 'E');
 				getIsland(linePic, newPic, height, width, row, col, island, 'a');
 				getIsland(linePic, newPic, height, width, row, col, island, 'b');
-				penMover(row, col, 0;
+				penMover(row, col, 0);
 			}
 		}
 	}
@@ -257,7 +249,7 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 }
 
 
-char* islandFinder(char* linePic, char* newPic, int height, int width) {
+char* mazeFollower(char* linePic, char* newPic, int height, int width) {
 
 
 

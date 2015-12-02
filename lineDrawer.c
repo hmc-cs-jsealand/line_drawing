@@ -74,9 +74,9 @@ void main() {
 	printPicture(linePic, height, width);
 
 	islandPic = islandFinder(linePic, islandPic, height, width);
-	printf('islandPic\n');
+	printf("islandPic\n");
 	printPicture(islandPic, height, width);
-	printf('linePic\n');
+	printf("linePic\n");
 	printPicture(linePic, height, width);
 
 	free(islandPic);
