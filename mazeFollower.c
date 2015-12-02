@@ -99,7 +99,7 @@ int penMover(char xpos, char ypos, char penState) {
 // N, S, E, W
 // a = NE, b = SE, c = SW, d = NW
 
-void getIsland(char* linePic, char* newPic, int height, int width,
+void lineFollow(char* linePic, char* newPic, int height, int width,
 		  int row, int col, int island, char flag) {
 	// printf("Row: %d, Col: %d\n", row, col);
 	if(flag == 'N') {
@@ -111,9 +111,9 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'N');
-				getIsland(linePic, newPic, height, width, row, col, island, 'd');
-				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'N');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'd');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'a');
 				penMover(row, col, 0);
 			}
 		}
@@ -127,9 +127,9 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'E');
-				getIsland(linePic, newPic, height, width, row, col, island, 'a');
-				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'E');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'a');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'b');
 				penMover(row, col, 0);
 			}
 		}
@@ -143,9 +143,9 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'S');
-				getIsland(linePic, newPic, height, width, row, col, island, 'b');
-				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'S');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'b');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'c');
 				penMover(row, col, 0);
 			}
 		}
@@ -159,9 +159,9 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'W');
-				getIsland(linePic, newPic, height, width, row, col, island, 'c');
-				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'W');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'c');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'd');
 				penMover(row, col, 0);
 			}
 		}
@@ -177,11 +177,11 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'a');
-				getIsland(linePic, newPic, height, width, row, col, island, 'N');
-				getIsland(linePic, newPic, height, width, row, col, island, 'E');
-				getIsland(linePic, newPic, height, width, row, col, island, 'd');
-				getIsland(linePic, newPic, height, width, row, col, island, 'b');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'a');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'N');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'E');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'd');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'b');
 				penMover(row, col, 0);
 			}
 		}
@@ -197,11 +197,11 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'b');
-				getIsland(linePic, newPic, height, width, row, col, island, 'E');
-				getIsland(linePic, newPic, height, width, row, col, island, 'S');
-				getIsland(linePic, newPic, height, width, row, col, island, 'a');
-				getIsland(linePic, newPic, height, width, row, col, island, 'c');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'b');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'E');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'S');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'a');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'c');
 				penMover(row, col, 0);
 			}
 		}
@@ -217,11 +217,11 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'c');
-				getIsland(linePic, newPic, height, width, row, col, island, 'S');
-				getIsland(linePic, newPic, height, width, row, col, island, 'W');
-				getIsland(linePic, newPic, height, width, row, col, island, 'b');
-				getIsland(linePic, newPic, height, width, row, col, island, 'd');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'c');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'S');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'W');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'b');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'd');
 				penMover(row, col, 0);
 			}
 		}
@@ -237,11 +237,11 @@ void getIsland(char* linePic, char* newPic, int height, int width,
 			else if(newPic[row*width + col] == 0) {
 				newPic[row*width + col] = island;
 				penMover(row, col, 3);
-				getIsland(linePic, newPic, height, width, row, col, island, 'd');
-				getIsland(linePic, newPic, height, width, row, col, island, 'W');
-				getIsland(linePic, newPic, height, width, row, col, island, 'N');
-				getIsland(linePic, newPic, height, width, row, col, island, 'c');
-				getIsland(linePic, newPic, height, width, row, col, island, 'a');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'd');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'W');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'N');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'c');
+				lineFollow(linePic, newPic, height, width, row, col, island, 'a');
 				penMover(row, col, 0);
 			}
 		}
@@ -262,7 +262,7 @@ char* mazeFollower(char* linePic, char* newPic, int height, int width) {
 	//			set pixel to 1
 	//		else
 	//			set pixel to island
-	//			run getIsland on that pixel
+	//			run lineFollow on that pixel
 	for(int row = 0; row < height; row++) {
 		for(int col = 0; col < width; col++) {
 			if(newPic[row*width + col] == 0) {
@@ -277,7 +277,7 @@ char* mazeFollower(char* linePic, char* newPic, int height, int width) {
 					char flag[8] = {'N','S','E','W','a','b','c','d'};
 					for(int i = 0; i < 8; i++) {
 						// printf("flag is %c\n",flag[i]);
-						getIsland(linePic, newPic, height, width, row, col, island, flag[i]);
+						lineFollow(linePic, newPic, height, width, row, col, island, flag[i]);
 					}
 					island++;
 				}
