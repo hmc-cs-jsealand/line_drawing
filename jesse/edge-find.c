@@ -17,6 +17,7 @@ int width, height;
 #include "load-image.c"
 #include "compute-edges.c"
 #include "lineThinning.c"
+#include "mazeFollower.c"
 
 void main(int argc, char *argv[])
 {
@@ -108,9 +109,26 @@ void main(int argc, char *argv[])
 		}
 	}
 
-	printf("writing output file...\n");
+	printf("writing THIN edges file...\n");
 	write_png_file(thin_edgesfile,edges);
 
+
+	// allocate memory for new mazeFollow pic
+	char* mazeFollowPic = malloc(height * width * sizeof(char));
+
+	// initialize array of 0's for new mazeFollow pic
+	for(int i = 0; i < height; i++) {
+		for(int j = 0; j < width; j++) {
+			mazeFollowPic[i*width + j] = 0;
+		}
+	}
+
+	SPIbegin();
+	printf("running maze follower...\n");
+	mazeFollowPic = mazeFollower(thinedges, mazeFollowPic, height, width);
+	printf("Done with maze follower...\n");
+
+	free(mazeFollowPic);
 	free(edges);
 	free(thinedges);
 
